@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import pydbus
 import time
+import sys
+import asyncio
 from datetime import datetime
 from gi.repository import GLib
-import sys
-import paho.mqtt.client as mqtt
-
+from plotter import convertBytetoDec, plot, init
 # return codes
 # 0: OK
 # 1: connection failed
@@ -47,18 +47,31 @@ def readData(numberSavedActData):
         device._path, uuid_savedActData)
     savedActData_chr = bus.get(bluez_service, savedActData_chr_path)
     for i in range(numberSavedActData):
-        got_savedActData = savedActData_chr.ReadValue({})
-        print(got_savedActData)
-        hexArray = bytes(got_savedActData).hex()
+        ByteArray = savedActData_chr.ReadValue({})
+        print(ByteArray)
+        hexArray = bytes(ByteArray).hex()
         print(hexArray)
 
-        hoursStart = got_savedActData[3]
-        minutesStart = got_savedActData[4]
-        secondsStart = got_savedActData[5]
+        if (numberSavedActData > 0):
 
-        hoursEnd = got_savedActData[9]
-        minutesEnd = got_savedActData[10]
-        secondsEnd = got_savedActData[11]
+            print(ByteArray[4])
+            print(ByteArray[5])
+            print(ByteArray[6])
+            print(ByteArray[7])
+            print(ByteArray[8])
+            print(ByteArray[9])
+
+            convertBytetoDec(
+                ByteArray[4], ByteArray[5], ByteArray[6], ByteArray[7], ByteArray[8], ByteArray[9])
+            plot()
+
+        hoursStart = ByteArray[3]
+        minutesStart = ByteArray[4]
+        secondsStart = ByteArray[5]
+
+        hoursEnd = ByteArray[9]
+        minutesEnd = ByteArray[10]
+        secondsEnd = ByteArray[11]
 
         datetimeStart_str = f"{hoursStart:02d}:{minutesStart:02d}:{secondsStart:02d}"
 
@@ -88,6 +101,7 @@ def getData():
     if numberSavedActData != 0:
         print("Found Data")
         readData(numberSavedActData)
+
     else:
         print("No data")
     return True
@@ -134,7 +148,7 @@ while not device.ServicesResolved:
     print('Service not resolved')
     time.sleep(0.5)
 
-
+init()
 # Read number of saved activity data
 GLib.timeout_add(2000, getData)
 
