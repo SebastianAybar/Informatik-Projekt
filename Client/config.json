@@ -1,0 +1,7 @@
+{
+    "mqtt_start" : "activity_data",
+    "mqtt_status" : "activity_data_status",
+    "mqtt_error" : "activity_data_error",
+    "mqttBroker" : "localhost",
+    "client_id" : "getActivities"
+}

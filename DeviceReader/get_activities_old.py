@@ -1,8 +1,7 @@
-#!/usr/bin/env python3
+
 import pydbus
 import time
 import sys
-import asyncio
 from datetime import datetime
 from gi.repository import GLib
 from plotter import convertBytetoDec, plot, init
@@ -63,7 +62,7 @@ def readData(numberSavedActData):
 
             convertBytetoDec(
                 ByteArray[4], ByteArray[5], ByteArray[6], ByteArray[7], ByteArray[8], ByteArray[9])
-            plot()
+            # plot()
 
         hoursStart = ByteArray[3]
         minutesStart = ByteArray[4]

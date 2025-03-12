@@ -10,6 +10,7 @@ value_acc_z_signed = []
 value_gyr_x_signed = []
 value_gyr_y_signed = []
 value_gyr_z_signed = []
+index = 0
 
 
 def init():
@@ -25,7 +26,12 @@ def convertBytetoDec(bytex1, bytex2, bytey1, bytey2, bytez1, bytez2):
     acc_x_bytes_combined = acc_x_bytes_2 + acc_x_bytes_1
     acc_x_signed_int = int.from_bytes(
         acc_x_bytes_combined, byteorder='little', signed=True)
-    value_acc_x_signed.append(acc_x_signed_int)
+    if value_acc_x_signed:
+        new_value = acc_x_signed_int - value_acc_x_signed[index]
+        value_acc_x_signed.append(new_value)
+        index + 1
+    else:
+        value_acc_x_signed.append(acc_x_signed_int)
 
     acc_y_bytes_1 = int(bytey1).to_bytes(1, byteorder='little')
     acc_y_bytes_2 = int(bytey2).to_bytes(1, byteorder='little')
@@ -40,6 +46,10 @@ def convertBytetoDec(bytex1, bytex2, bytey1, bytey2, bytez1, bytez2):
     acc_z_signed_int = int.from_bytes(
         acc_z_bytes_combined, byteorder='little', signed=True)
     value_acc_z_signed.append(acc_z_signed_int)
+
+    print(value_acc_x_signed)
+    print(value_acc_y_signed)
+    print(value_acc_z_signed)
 
 
 def plot():

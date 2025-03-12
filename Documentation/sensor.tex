@@ -1,0 +1,75 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listingsutf8}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hypernat}
+\usepackage{footnote}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{titlesec}
+\usepackage{dirtree}
+\usepackage{float}
+\usepackage{fancyhdr}
+
+
+
+%SnowCard begin
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+
+\newenvironment{myreq}[1]{%
+\setlist[description]{font=\normalfont\color{darkgray}}%
+\begin{tcolorbox}[colframe=black,colback=white, sharp corners, boxrule=1pt]%
+\bfseries\color{blue}%
+\begin{description}#1}%
+{\end{description}\end{tcolorbox}}
+
+\newcommand{\twoinline}[2]{\begin{multicols}{2}#1 #2\end{multicols}}
+
+\newcommand{\reqno}{\item[Requirement \#:]}
+\newcommand{\reqtype}{\item[Requirement Type:]}
+\newcommand{\reqdesc}{\item[Description:]}
+%SnowCard end
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%% Header
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{28pt}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+%%Title
+\title{Auswertungs Software der Sensor Daten}
+
+\author{
+    Okan Süner -
+    \texttt{1295704}\\
+    \texttt{okan.suener@stud.fra-uas.de}
+}
+\begin{document}
+
+\begin{titlepage}
+
+  \maketitle
+  \thispagestyle{empty}
+
+\end{titlepage}
+
+
+\section{Software}
+
+\subsection{Plannung der Reise}
+das
+
+\end{document}

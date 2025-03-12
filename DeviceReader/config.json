@@ -1,0 +1,9 @@
+{  
+        "dev_id": "00:80:E1:27:BE:19",
+        "uuid_numberSavedActData":"00002b45-0000-1000-8000-00805f9b34fb",
+        "uuid_savedActData":"00002ad3-0000-1000-8000-00805f9b34fb",
+        "uuid_rtc" : "00002b91-0000-1000-8000-00805f9b34fb",
+        "mqttBroker" : "localhost",
+        "mqtt_topic" : "activity_data",
+        "client_id" : "activityData"  
+}
