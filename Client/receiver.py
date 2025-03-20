@@ -1,10 +1,12 @@
 import sys
-import tkinter as tk
 import paho.mqtt.client as mqtt
 import json
+from graphs import setup
+from SensorData import SensordataList
+from datetime import datetime
 
 
-with open('Client/config.json', 'r') as file:
+with open('Informatik-Projekt\Client\config.json', 'r') as file:
     data = json.load(file)
 
 # Fill variables with the data given from the json
@@ -26,16 +28,12 @@ def onConnect(client, userdata, flags, rc, properties):
 
 
 def onMessage(client, userdata, msg):
-    print("Hier")
+
     print(f"Message received [{msg.topic}]: {msg.payload}")
-    print("Hier2")
     sys.stdout.flush()
-    print("Hier3")
     payload = str(msg.payload)
-    print("Hier4")
-    # should be a string in the format  b'XX:XX:XX:XX:XX:XX'
     print(payload)
-    status_var.set(payload)
+    #status_var.set(payload)
 
     if str(payload[4]) != ':' or str(payload[7]) != ':' or str(payload[10]) != ':' or str(payload[13]) != ':' or str(payload[16]) != ':':
         print("Ungültige Geräte-ID!")
@@ -63,24 +61,24 @@ def start_mqtt():
     client.loop_start()  # Start networking daemon
 
 
-# Main program runs in an endless loop with 2 seconds repetition time of a connection attempt.
-# Reason: If this script is started via systemd at system startup, the docker container with the mqtt broker may not be ready yet.
-root = tk.Tk()
-root.title("Receiver")
-root.geometry("1000x600")
-root.configure(bg="#99aab5")
 
-status_var = tk.StringVar(value="Waiting")
-label = tk.Label(root, textvariable=status_var)
-label.pack(pady=20)
+#status_var = tk.StringVar(value="Waiting")
+#label = tk.Label(root, textvariable=status_var)
+#label.pack(pady=20)
 
-# start_mqtt()
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id)
-# client.subscribe(mqtt_start)
-client.on_connect = onConnect
-client.on_message = onMessage
-# client.username_pw_set("myusername", "mypassword")
-client.connect(mqttBroker, 1883, 60)
-client.loop_start()
 
-root.mainloop()
+#client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id)
+#client.on_connect = onConnect
+#client.on_message = onMessage
+#client.connect(mqttBroker, 1883, 60)
+#client.loop_start()
+startTime = datetime.strptime("2025-03-20 13:33:27", "%Y-%m-%d %H:%M:%S")
+#data = "00:80:E1:27:BE:19_2025-03-19 13:33:27_2025-03-19 13:33:36_4_5_5_0000_0000_0000_000_003_001_0150_241"
+listing = SensordataList() 
+#listing.writeData(data)
+#listing.getData()
+#print(listing.countForDay(startTime,"situps"))
+#print(listing.maxForDay(startTime,"stepCounter"))
+
+setup()
+
